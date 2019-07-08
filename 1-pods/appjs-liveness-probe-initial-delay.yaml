@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: appjs-liveness-initial-delay
+spec:
+  containers:
+  - image: jenoovchi/appjs:unhealthy
+    name: appjs
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 15

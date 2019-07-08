@@ -1,0 +1,19 @@
+apiVersion: apps/v1beta2
+kind: ReplicaSet
+metadata:
+  name: appjs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: appjs
+  template:
+    metadata:
+      labels:
+        app: appjs
+    spec:
+      containers:
+      - image: jenoovchi/appjs
+        name: appjs
+        ports:
+        - containerPort: 8080

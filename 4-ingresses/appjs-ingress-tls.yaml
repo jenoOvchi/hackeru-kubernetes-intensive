@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: appjs
+spec:
+  tls:
+  - hosts:
+    - appjs.example.com
+    secretName: tls-secret
+  rules:
+  - host: appjs.example.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: appjs-nodeport
+          servicePort: 80

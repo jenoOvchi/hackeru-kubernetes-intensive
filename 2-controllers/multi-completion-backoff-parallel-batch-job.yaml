@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: multi-completion-backoff-batch-job
+spec:
+  completions: 5
+  parallelism: 2
+  backoffLimit: 3
+  activeDeadlineSeconds: 20
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - image: luksa/batch-job
+        name: main

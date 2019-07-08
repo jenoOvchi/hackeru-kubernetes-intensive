@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: appjs-liveness
+spec:
+  containers:
+  - image: jenoovchi/appjs:unhealthy
+    name: appjs
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8080

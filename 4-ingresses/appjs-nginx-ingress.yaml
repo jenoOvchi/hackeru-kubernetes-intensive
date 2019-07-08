@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: appjs-nginx
+spec:
+  rules:
+  - host: appjs.example.com
+    http:
+      paths:
+      - path: /appjs
+        backend:
+          serviceName: appjs-nodeport
+          servicePort: 80
+      - path: /nginx
+        backend:
+          serviceName: nginx-nodeport
+          servicePort: 80

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: appjs-manual-v2
+  labels:
+    creation_method: manual
+    env: prod
+spec:
+  containers:
+  - image: jenoovchi/appjs
+    name: appjs
+    ports:
+    - containerPort: 8080
