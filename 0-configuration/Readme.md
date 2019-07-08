@@ -2,7 +2,7 @@
 ---
 
 ## Install VisualStudioCode (опционально)
-Скачиваем: https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe
+Скачиваем: https://code.visualstudio.com
 1. Запускаем файл "Docker for Windows Installer.exe"
 2. Устанавливаем VisualStudioCode
 3. Запускаем ярлык VisualStudioCode на рабочем столе
