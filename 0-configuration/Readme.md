@@ -298,7 +298,7 @@ exit
 ## Install Dashboard
 Создаём ресурсы информационной панели:
 ```bash
-kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta1/aio/deploy/recommended.yaml
 ```
 
 Запускаем прокси для доступа к информационной панели:
