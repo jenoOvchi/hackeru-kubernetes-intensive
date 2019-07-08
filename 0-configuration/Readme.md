@@ -1,6 +1,12 @@
 # Configure your Desktop
 ---
 
+## !!! Если не работает виртуализация/что-то не запускается
+1. Скачиваем MobaXterm: https://mobaxterm.mobatek.net/download-home-edition.html
+2. Подключаемся по OpenVPN
+3. Заходим по SSH на одну из предоставленных машин
+
+
 ## Install VisualStudioCode (опционально)
 Скачиваем: https://code.visualstudio.com
 1. Запускаем файл "Docker for Windows Installer.exe"
