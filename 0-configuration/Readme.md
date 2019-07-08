@@ -1,4 +1,4 @@
-# Configure your Desctop
+# Configure your Desktop
 ---
 
 ## Install VisualStudioCode (опционально)
