@@ -516,7 +516,7 @@ k describe svc appjs-loadbalancer
 
 Проверяем доступность приложения на внешней балансировке (также можно открыть в браузере):
 ```bash
-curl http://$(k get svc appjs-loadbalancer | grep appjs | awk '{print $3}')
+curl http://$(k get svc appjs-loadbalancer | grep appjs | awk '{print $4}')
 ```
 
 Создаём описание сервиса с внешней балансировкой нагрузки и политикой вызова локальных модулей:
@@ -552,5 +552,5 @@ k describe svc appjs-loadbalancer-local
 
 Проверяем доступность приложения на внешней балансировке с политикой вызова локальных модулей:
 ```bash
-curl http://$(k get svc appjs-loadbalancer-local | grep appjs | awk '{print $3}')
+curl http://$(k get svc appjs-loadbalancer-local | grep appjs | awk '{print $4}')
 ```
