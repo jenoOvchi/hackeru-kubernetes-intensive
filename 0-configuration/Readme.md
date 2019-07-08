@@ -259,9 +259,10 @@ echo "alias k=kubectl" >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
-Устанавливаем kubectl:
+Устанавливаем и настраиваем kubectl:
 ```bash
 gcloud components install kubectl
+gcloud container clusters get-credentials <your-cluster>
 ```
 
 Устнавливаем средства дополнения команд:
