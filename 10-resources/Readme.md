@@ -92,7 +92,52 @@ k describe po limited-pod
 k exec -it limited-pod top
 ```
 
-Создаём ограничения на ресурсы для пространство имён default:
+Создадим развёртывание с запросом и лимитом ресурсов:
+```bash
+vi appjs-deployment-v1.yaml
+```
+
+```yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: appjs
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: appjs
+      labels:
+        app: appjs
+    spec:
+      containers:
+      - image: jenoovchi/appjs:v1
+        name: nodejs
+        resources:
+          requests:
+            cpu: 200m
+            memory: 10Mi
+          limits:
+            cpu: 1
+            memory: 20Mi
+```
+
+Создаём средство автоматического масштабирования для развёртывания:
+```bash
+k autoscale deployment appjs --cpu-percent=30 --min=1 --max=5
+```
+
+Генерируем нагрузку:
+```bash
+k run -it --rm --restart=Never loadgenerator --image=busybox -- sh -c "while true; do wget -O - -q http://appjs.default; done"
+```
+
+Наблюдаем за изменением количества экземпляров:
+```bash
+k get po -w
+```
+
+Создаём описание ограничения на ресурсы для пространство имён default:
 ```bash
 vi limits.yaml
 ```
@@ -132,4 +177,55 @@ spec:
       storage: 1Gi
     max:
       storage: 10Gi
+```
+
+Создаём ограничение на ресурсы для пространство имён default:
+```bash
+k create -f limits.yaml
+```
+
+Создаём описание лимитов на ресурсы пространства имён default:
+```bash
+vi cpu-and-mem.yaml
+```
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cpu-and-mem
+spec:
+  hard:
+    requests.cpu: 400m
+    requests.memory: 200Mi
+    limits.cpu: 600m
+    limits.memory: 500Mi
+```
+
+Создаём описание квоты на ресурсы:
+```bash
+vi objects.yaml
+```
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: objects
+spec:
+  hard:
+    pods: 10
+    replicationcontrollers: 5
+    secrets: 10
+    configmaps: 10
+    persistentvolumeclaims: 5
+    services: 5
+    services.loadbalancers: 1
+    services.nodeports: 2
+    ssd.storageclass.storage.k8s.io/persistentvolumeclaims: 2
+```
+
+Создаём квоту на ресурсы:
+```bash
+k create -f objects.yaml
 ```
