@@ -1,0 +1,7 @@
+...
+    env:
+    - name: FIRST_VAR
+      value: "foo"
+    - name: SECOND_VAR
+      value: "$(FIRST_VAR)bar"
+...

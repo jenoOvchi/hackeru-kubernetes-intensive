@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: appjs-v1
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: appjs
+      labels:
+        app: appjs
+    spec:
+      containers:
+      - image: jenoovchi/appjs:v1
+        name: nodejs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: appjs
+spec:
+  type: LoadBalancer
+  selector:
+    app: appjs
+  ports:
+  - port: 80
+    targetPort: 8080

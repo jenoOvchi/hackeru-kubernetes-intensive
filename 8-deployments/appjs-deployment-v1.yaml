@@ -1,0 +1,15 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: appjs
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: appjs
+      labels:
+        app: appjs
+    spec:
+      containers:
+      - image: jenoovchi/appjs:v1
+        name: nodejs

@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fortune-configmap-volume-with-subpath
+spec:
+  containers:
+  - image: jenoovchi/fortune:args
+    env:
+    - name: INTERVAL
+      valueFrom:
+        configMapKeyRef:
+          name: fortune-config
+          key: sleep-interval
+    args: ["$(INTERVAL)"]
+    name: html-generator
+    volumeMounts:
+    - name: html
+      mountPath: /var/htdocs
+  - image: nginx:alpine
+    name: web-server
+    volumeMounts:
+    - name: html
+      mountPath: /usr/share/nginx/html
+    - name: config
+      mountPath: /etc/nginx/myconfig.conf
+      subPath: myconfig.conf
+    ports:
+    - containerPort: 80
+      protocol: TCP
+  volumes:
+  - name: html
+    emptyDir: {}
+  - name: config
+    configMap:
+      name: fortune-config
+      items:
+      - key: my-nginx-config.conf
+        path: myconfig.conf

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: curl-with-ambassador
+spec:
+  containers:
+  - image: tutum/curl
+    name: main
+    command: ["sleep", "9999999"]
+  - image: luksa/kubectl-proxy:1.6.2
+    name: ambassador
