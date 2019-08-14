@@ -86,7 +86,7 @@ k get deploy -n kube-system
 k delete po $(k get po | grep appjs | awk '{print $1}') | k get events --watch
 ```
 
-## Topic 4: Pods
+## Topic 5: Pods
 
 Создание модуля Nginx:
 ```bash
@@ -105,7 +105,7 @@ minikube ssh
 docker ps | grep nginx
 ```
 
-## Topic 4: Leader ellection
+## Topic 6: Leader ellection
 
 Демонстрация механизма выбора лидера при создании конечных точек:
 ```bash
